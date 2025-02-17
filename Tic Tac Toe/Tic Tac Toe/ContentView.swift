@@ -99,13 +99,13 @@ struct ContentView: View {
                 if let line = winnerLine {
                     Rectangle()
                         .fill(winner == "X" ? Color.red : Color.blue)
-                        .frame(width: isHorizontal ? 350 : 5, height: isHorizontal ? 5 : 350)
-                        .position(x: (line.start.x + line.end.x)/2, y: (line.start.y + line.end.y)/2)
+                        .frame(
+                            width: isDiagonal ? 350 * sqrt(2) : (isHorizontal ? 350 : 5),
+                            height: isDiagonal ? 5 : (isHorizontal ? 5 : 350)
+                        )
+                        .position(x: (line.start.x + line.end.x) / 2, y: (line.start.y + line.end.y) / 2)
                         .rotationEffect(isDiagonal ? getRotationAngle(start: line.start, end: line.end) : .degrees(0))
-                        //.animation(.easeInOut(duration: 0.5))
                 }
-                
-                
             }
             .frame(width: 360, height: 360)
             
@@ -171,11 +171,17 @@ struct ContentView: View {
     
     //winner ko lagi line banauna lai
     private func getLinePosition(for combination: [Int]) -> (CGPoint, CGPoint) {
-
         let positions: [CGPoint] = (0..<9).map { index in
-            let x = CGFloat(index % 3) * 125 + 115 / 2 //115 gridsize and 125 chai totalsize = gridsize+ spacing ho
+            let x = CGFloat(index % 3) * 125 + 115 / 2  // Adjust for grid size
             let y = CGFloat(index / 3) * 121 + 122 / 2
             return CGPoint(x: x, y: y)
+        }
+
+        // Correct diagonal positions
+        if combination == [0, 4, 8] { // Left Top to Right Bottom
+            return (positions[0], positions[8]) // Correct order
+        } else if combination == [2, 4, 6] { // Right Top to Left Bottom
+            return (positions[2], positions[6]) // Correct order
         }
 
         return (positions[combination.first!], positions[combination.last!])
@@ -188,8 +194,9 @@ struct ContentView: View {
         let dx = end.x - start.x
         let dy = end.y - start.y
         
-        return Angle(radians: atan2(dy,dx))
+        return Angle(degrees: atan2(dy, dx) * 180 / .pi)
     }
+
 }
 
 #Preview {
