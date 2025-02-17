@@ -14,6 +14,8 @@ struct ContentView: View {
     @State private var xWinningCount: Int = 0
     @State private var oWinningCount: Int = 0
     
+    @State private var isShowAlert: Bool = false
+    
     @State private var winnerLine: (start: CGPoint, end: CGPoint)? = nil
     @State private var isHorizontal: Bool = false
     @State private var isVertical: Bool = false
@@ -130,6 +132,11 @@ struct ContentView: View {
             .foregroundColor(.white)
             .cornerRadius(10)
         }
+        .alert("Player \(winner ?? "No one") wins!", isPresented: $isShowAlert){
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Congratulations! Player \(winner ?? "No one") wins the game.")
+        }
 
     }
     
@@ -156,12 +163,17 @@ struct ContentView: View {
         
         if winner == "X" {
             xWinningCount += 1
+            winner = "X"
+            isShowAlert = true
         } else if winner == "O" {
+            winner = "O"
             oWinningCount += 1
+            isShowAlert = true
         }
 
         if !board.contains("") {
             winner = "Draw"
+            isShowAlert = true
         }
         
         return
