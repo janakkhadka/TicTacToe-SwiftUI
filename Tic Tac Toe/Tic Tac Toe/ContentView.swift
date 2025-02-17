@@ -11,6 +11,8 @@ struct ContentView: View {
     @State private var board = Array(repeating: "", count: 9) //yo vanya chai -> ["", "", "", "", "", "", "", "", ""]
     @State private var isXTurn = true
     @State private var winner: String? = nil
+    @State private var xWinningCount: Int = 0
+    @State private var oWinningCount: Int = 0
     
     @State private var winnerLine: (start: CGPoint, end: CGPoint)? = nil
     @State private var isHorizontal: Bool = false
@@ -20,6 +22,17 @@ struct ContentView: View {
     var body: some View {
         VStack {
             //for player who choose O
+            Button("Restart") {
+                board = Array(repeating: "", count: 9)
+                isXTurn = true
+                winner = nil
+                winnerLine = nil
+            }
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .rotationEffect(.degrees(180))
             Text("Won: ")
                 .rotationEffect(.degrees(180))
             Text("Player: O")
@@ -92,10 +105,7 @@ struct ContentView: View {
                         //.animation(.easeInOut(duration: 0.5))
                 }
                 
-//                Rectangle()
-//                    .fill(Color.red)
-//                    .frame(width: 350, height: 5)
-//                    .position(x: 185, y: 63)
+                
             }
             .frame(width: 360, height: 360)
             
@@ -105,7 +115,20 @@ struct ContentView: View {
             //for player who choose X
             Text("Your Turn")
             Text("Player: X")
-            Text("Won: ")
+                .font(.system(size: 40, weight: .bold))
+                .foregroundColor(.red)
+            Text("Won: \(xWinningCount)")
+            
+            Button("Restart") {
+                board = Array(repeating: "", count: 9)
+                isXTurn = true
+                winner = nil
+                winnerLine = nil
+            }
+            .padding()
+            .background(Color.red)
+            .foregroundColor(.white)
+            .cornerRadius(10)
         }
 
     }
@@ -123,17 +146,25 @@ struct ContentView: View {
                 winner = board[combination[0]]
                 winnerLine = getLinePosition(for: combination)
                 
-                isHorizontal = combination[0] + 1 == combination[1]  // Checks if it's a horizontal win
-                isVertical = combination[0] + 3 == combination[1]    // Checks if it's a vertical win
+                isHorizontal = combination[0] + 1 == combination[1]  // horizontal le jiteko ho vane
+                isVertical = combination[0] + 3 == combination[1]    // vertical le jiteko ho vane
                 isDiagonal = !isHorizontal && !isVertical            // If neither, it's diagonal
 
-                return
+                //return
             }
+        }
+        
+        if winner == "X" {
+            xWinningCount += 1
+        } else if winner == "O" {
+            oWinningCount += 1
         }
 
         if !board.contains("") {
             winner = "Draw"
         }
+        
+        return
     }
 
 
