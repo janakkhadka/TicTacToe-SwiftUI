@@ -35,12 +35,15 @@ struct ContentView: View {
             .foregroundColor(.white)
             .cornerRadius(10)
             .rotationEffect(.degrees(180))
-            Text("Won: ")
+            Text("Won: \(oWinningCount)")
                 .rotationEffect(.degrees(180))
             Text("Player: O")
                 .rotationEffect(.degrees(180))
-            Text("Your Turn")
+                .font(.system(size: 40, weight: .bold))
+                .foregroundColor(.blue)
+            Text(winner == nil ? "Your Turn" : winner == "X" ? "You Lose!" : "You Win!")
                 .rotationEffect(.degrees(180))
+                .opacity(winner != nil ? 1 : isXTurn ? 0 : 1)
             
             //board design
             //gridline of board
@@ -102,7 +105,7 @@ struct ContentView: View {
                     Rectangle()
                         .fill(winner == "X" ? Color.red : Color.blue)
                         .frame(
-                            width: isDiagonal ? 350 * sqrt(2) : (isHorizontal ? 350 : 5),
+                            width: isDiagonal ? 350 * 1.3 : (isHorizontal ? 350 : 5),
                             height: isDiagonal ? 5 : (isHorizontal ? 5 : 350)
                         )
                         .position(x: (line.start.x + line.end.x) / 2, y: (line.start.y + line.end.y) / 2)
@@ -115,7 +118,8 @@ struct ContentView: View {
             
             
             //for player who choose X
-            Text("Your Turn")
+            Text(winner == nil ? "Your Turn" : winner == "O" ? "You Lose!" : "You Win!")
+                .opacity(winner != nil ? 1 : isXTurn ? 1 : 0)
             Text("Player: X")
                 .font(.system(size: 40, weight: .bold))
                 .foregroundColor(.red)
