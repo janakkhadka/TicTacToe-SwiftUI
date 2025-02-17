@@ -140,13 +140,10 @@ struct ContentView: View {
     
     //winner ko lagi line banauna lai
     private func getLinePosition(for combination: [Int]) -> (CGPoint, CGPoint) {
-        let gridSize: CGFloat = 122
-        let spacing: CGFloat = 0
-        let totalCellSize = gridSize + spacing
 
         let positions: [CGPoint] = (0..<9).map { index in
-            let x = CGFloat(index % 3) * totalCellSize + gridSize / 2
-            let y = CGFloat(index / 3) * totalCellSize + gridSize / 2
+            let x = CGFloat(index % 3) * 125 + 115 / 2 //115 gridsize and 125 chai totalsize = gridsize+ spacing ho
+            let y = CGFloat(index / 3) * 121 + 122 / 2
             return CGPoint(x: x, y: y)
         }
 
