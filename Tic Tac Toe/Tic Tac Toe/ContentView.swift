@@ -11,7 +11,11 @@ struct ContentView: View {
     @State private var board = Array(repeating: "", count: 9) //yo vanya chai -> ["", "", "", "", "", "", "", "", ""]
     @State private var isXTurn = true
     @State private var winner: String? = nil
+    
     @State private var winnerLine: (start: CGPoint, end: CGPoint)? = nil
+    @State private var isHorizontal: Bool = false
+    @State private var isVertical: Bool = false
+    @State private var isDiagonal: Bool = false
     
     var body: some View {
         VStack {
@@ -81,12 +85,17 @@ struct ContentView: View {
                 //line tannako lagi jitesi
                 if let line = winnerLine {
                     Rectangle()
-                        .fill(Color.red)
-                        .frame(width: 350, height: 5)
+                        .fill(winner == "X" ? Color.red : Color.blue)
+                        .frame(width: isHorizontal ? 350 : 5, height: isHorizontal ? 5 : 350)
                         .position(x: (line.start.x + line.end.x)/2, y: (line.start.y + line.end.y)/2)
-                        .rotationEffect(getRotationAngle(start: line.start, end: line.end))
+                        .rotationEffect(isDiagonal ? getRotationAngle(start: line.start, end: line.end) : .degrees(0))
                         //.animation(.easeInOut(duration: 0.5))
                 }
+                
+//                Rectangle()
+//                    .fill(Color.red)
+//                    .frame(width: 350, height: 5)
+//                    .position(x: 185, y: 63)
             }
             .frame(width: 360, height: 360)
             
@@ -104,34 +113,47 @@ struct ContentView: View {
     //to check the winner
     private func checkWinner() {
         let winningCombinations: [[Int]] = [
-            [0,1,2], [3,4,5], [6,7,8], //horizontal ko lagi
-            [0,3,6], [1,4,7], [2,5,8], //vertical ko lagi
-            [0,4,8], [2,4,6] //diagonal ko lagi
+            [0,1,2], [3,4,5], [6,7,8], // Horizontal
+            [0,3,6], [1,4,7], [2,5,8], // Vertical
+            [0,4,8], [2,4,6]           // Diagonal
         ]
-        
+
         for combination in winningCombinations {
             if board[combination[0]] != "" && board[combination[0]] == board[combination[1]] && board[combination[1]] == board[combination[2]] {
                 winner = board[combination[0]]
                 winnerLine = getLinePosition(for: combination)
                 
+                isHorizontal = combination[0] + 1 == combination[1]  // Checks if it's a horizontal win
+                isVertical = combination[0] + 3 == combination[1]    // Checks if it's a vertical win
+                isDiagonal = !isHorizontal && !isVertical            // If neither, it's diagonal
+
                 return
             }
         }
-        
-        if !board.contains(""){
+
+        if !board.contains("") {
             winner = "Draw"
         }
     }
+
+
     
     //winner ko lagi line banauna lai
     private func getLinePosition(for combination: [Int]) -> (CGPoint, CGPoint) {
-        let positions: [CGPoint] = [
-            CGPoint(x: 75, y: 75), CGPoint(x: 200, y: 75), CGPoint(x: 350, y: 75),
-            CGPoint(x: 75, y: 200), CGPoint(x: 200, y: 150), CGPoint(x: 350, y: 200),
-            CGPoint(x: 75, y: 350), CGPoint(x: 200, y: 350), CGPoint(x: 350, y: 350)
-        ]
-        return (positions[combination[0]], positions[combination[2]])
+        let gridSize: CGFloat = 122
+        let spacing: CGFloat = 0
+        let totalCellSize = gridSize + spacing
+
+        let positions: [CGPoint] = (0..<9).map { index in
+            let x = CGFloat(index % 3) * totalCellSize + gridSize / 2
+            let y = CGFloat(index / 3) * totalCellSize + gridSize / 2
+            return CGPoint(x: x, y: y)
+        }
+
+        return (positions[combination.first!], positions[combination.last!])
     }
+
+
     
     //lineko rotation ko lagi
     private func getRotationAngle(start: CGPoint, end: CGPoint) -> Angle {
