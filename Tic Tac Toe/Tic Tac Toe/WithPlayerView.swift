@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct WithPlayerView: View {
     @State private var board = Array(repeating: "", count: 9) //yo vanya chai -> ["", "", "", "", "", "", "", "", ""]
     @State private var isXTurn = true
     @State private var winner: String? = nil
@@ -35,6 +35,8 @@ struct ContentView: View {
             .foregroundColor(.white)
             .cornerRadius(10)
             .rotationEffect(.degrees(180))
+            .opacity(winner != nil ? 1 : 0)
+            
             Text("Won: \(oWinningCount)")
                 .rotationEffect(.degrees(180))
             Text("Player: O")
@@ -135,6 +137,7 @@ struct ContentView: View {
             .background(Color.red)
             .foregroundColor(.white)
             .cornerRadius(10)
+            .opacity(winner != nil ? 1 : 0)
         }
         .alert("Player \(winner ?? "No one") wins!", isPresented: $isShowAlert){
             Button("OK", role: .cancel) { }
@@ -216,5 +219,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    WithPlayerView()
 }

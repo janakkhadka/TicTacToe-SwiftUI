@@ -1,56 +1,78 @@
+//import SwiftUI
 //
-//  TrialView.swift
-//  Tic Tac Toe
+//struct MainMenuView: View {
+//    var body: some View {
+//        NavigationStack {
+//            VStack(spacing: 20) {
+//                Text("Tic-Tac-Toe")
+//                    .font(.largeTitle)
+//                    .fontWeight(.bold)
+//                
+//                // Navigate to 2-Player Mode
+//                NavigationLink("Play with Computer") {
+//                    TwoPlayerModeView()
+//                }
+//                .buttonStyle(CustomButtonStyle())
 //
-//  Created by Janak Khadka on 16/02/2025.
+//                // Navigate to Computer Mode
+//                NavigationLink("Play with Friend") {
+//                    ComputerModeView()
+//                }
+//                .buttonStyle(CustomButtonStyle())
+//            }
+//            .padding()
+//        }
+//    }
+//}
 //
-
-import SwiftUI
-
-struct TrialView: View {
-    var body: some View {
-        ZStack {
-            // Vertical Lines
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Rectangle()
-                        .frame(width: 5, height: 250)
-                        .foregroundColor(.black)
-                    Spacer()
-                    Rectangle()
-                        .frame(width: 5, height: 250)
-                        .foregroundColor(.black)
-                    Spacer()
-                }
-                Spacer()
-            }
-            
-            // Horizontal Lines
-            HStack {
-                Spacer()
-                VStack {
-                    Spacer()
-                    Rectangle()
-                        .frame(width: 250, height: 5)
-                        .foregroundColor(.black)
-                    Spacer()
-                    Rectangle()
-                        .frame(width: 250, height: 5)
-                        .foregroundColor(.black)
-                    Spacer()
-                }
-                Spacer()
-            }
-        }
-        .frame(width: 260, height: 260)
-    }
-}
-
-struct TicTacToeGrid_Previews: PreviewProvider {
-    static var previews: some View {
-        TrialView()
-    }
-}
-
+//// 🎮 Two Player Mode View
+//struct TwoPlayerModeView: View {
+//    var body: some View {
+//        VStack {
+//            Text("2-Player Mode")
+//                .font(.title)
+//            
+//            // Game UI Goes Here...
+//            
+//            NavigationLink("Back to Menu") {
+//                MainMenuView()
+//            }
+//            .buttonStyle(CustomButtonStyle())
+//        }
+//    }
+//}
+//
+//// 🤖 Computer Mode View
+//struct ComputerModeView: View {
+//    var body: some View {
+//        VStack {
+//            Text("Computer Mode")
+//                .font(.title)
+//            
+//            // AI Game Logic Goes Here...
+//
+//            NavigationLink("Back to Menu") {
+//                MainMenuView()
+//            }
+//            .buttonStyle(CustomButtonStyle())
+//        }
+//    }
+//}
+//
+//// 🔘 Custom Button Style
+//struct CustomButtonStyles: ButtonStyle {
+//    func makeBody(configuration: Configuration) -> some View {
+//        configuration.label
+//            .padding()
+//            .frame(width: 200)
+//            .background(Color.blue)
+//            .foregroundColor(.white)
+//            .cornerRadius(10)
+//            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+//            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
+//    }
+//}
+//
+//#Preview {
+//    MainMenuView()
+//}
