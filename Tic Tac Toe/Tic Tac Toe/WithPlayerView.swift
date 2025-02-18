@@ -139,10 +139,10 @@ struct WithPlayerView: View {
             .cornerRadius(10)
             .opacity(winner != nil ? 1 : 0)
         }
-        .alert("Player \(winner ?? "No one") wins!", isPresented: $isShowAlert){
+        .alert(winner == "Draw" ? "Draw" : "Player \(winner ?? "") wins!", isPresented: $isShowAlert){
             Button("OK", role: .cancel) { }
         } message: {
-            Text("Congratulations! Player \(winner ?? "No one") wins the game.")
+            Text(winner == "Draw" ? "No one wins the game." : "Congratulations! Player \(winner ?? "") wins the game.")
         }
 
     }
