@@ -2,7 +2,7 @@ import SwiftUI
 
 struct WithComputerView: View {
     @State private var board = Array(repeating: "", count: 9)
-    @State private var isXTurn = true
+    @State private var isXTurn = true	
     @State private var winner: String? = nil
     @State private var xWinningCount: Int = 0
     @State private var oWinningCount: Int = 0
