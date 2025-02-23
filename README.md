@@ -19,9 +19,7 @@ A fun and interactive **iOS Tic-Tac-Toe game** built with **Swift** and **SwiftU
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue to discuss modifications.
 
-## License
-(Include license details if applicable)
 
 ## Contact
-For any inquiries, reach out via [your email or GitHub profile].
+For any inquiries, reach out via janakkhadka08@gmail.com.
 
