@@ -11,7 +11,7 @@ A fun and interactive **iOS Tic-Tac-Toe game** built with **Swift** and **SwiftU
 ## Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/jk-tic-tac-toe.git
+   git clone https://github.com/janakkhadka/TicTacToe-SwiftUI
    ```
 2. Open the project in Xcode.
 3. Build and run on a simulator or a physical device.
