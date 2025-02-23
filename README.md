@@ -2,6 +2,8 @@
 
 A fun and interactive **iOS Tic-Tac-Toe game** built with **Swift** and **SwiftUI**, offering both **multiplayer gameplay** and **computer mode**.
 
+![Screenshot 1](images/main.png)
+
 ## Features
 - **Multiplayer Mode**: Play with a friend in **2-player mode**.
 - **Computer Mode**: Challenge the AI for a solo gaming experience.
