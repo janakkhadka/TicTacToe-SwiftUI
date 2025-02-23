@@ -25,3 +25,12 @@ Pull requests are welcome. For major changes, please open an issue to discuss mo
 ## Contact
 For any inquiries, reach out via janakkhadka08@gmail.com.
 
+
+## 🌟 Star the Project
+
+If you find this project useful or interesting, please consider giving it a **star** on GitHub! Your support helps motivate further development and improvements.
+
+[![Star this repo](https://img.shields.io/github/stars/janakkhadka/TicTacToe-SwiftUI?style=social)](https://github.com/janakkhadka/TicTacToe-SwiftUI/stargazers)
+
+Click the button above or simply go to the repository and click the **Star** button at the top right. Thank you! 🚀
+
