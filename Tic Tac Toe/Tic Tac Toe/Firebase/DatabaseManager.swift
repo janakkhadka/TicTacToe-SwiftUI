@@ -10,6 +10,8 @@ import FirebaseDatabase
 
 class DatabaseManager: ObservableObject {
     private let dbRef = Database.database().reference()
+    
+    @Published var users: [String: Any] = [:]
 
     func writeData(userID: String, name: String, age: Int) {
         let user: [String: Any] = [
@@ -17,6 +19,16 @@ class DatabaseManager: ObservableObject {
             "age": age
         ]
         dbRef.child("users").child(userID).setValue(user)
+    }
+    
+    func readData() {
+        dbRef.child("users").observe(.value) { snapshot in
+            if let value = snapshot.value as? [String: Any] {
+                DispatchQueue.main.async {
+                    self.users = value
+                }
+            }
+        }
     }
 }
 

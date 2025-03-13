@@ -42,6 +42,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Firebase/DatabaseManager.swift,
+				Firebase/FirebaseTestView.swift,
 				"Firebase/GoogleService-Info.plist",
 			);
 			target = 9DD876362D62172A00EA2800 /* Tic Tac ToeTests */;
@@ -50,6 +51,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Firebase/DatabaseManager.swift,
+				Firebase/FirebaseTestView.swift,
 				"Firebase/GoogleService-Info.plist",
 			);
 			target = 9DD876402D62172A00EA2800 /* Tic Tac ToeUITests */;
