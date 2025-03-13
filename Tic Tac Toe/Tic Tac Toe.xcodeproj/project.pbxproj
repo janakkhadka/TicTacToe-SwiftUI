@@ -29,9 +29,30 @@
 		9DD876412D62172A00EA2800 /* Tic Tac ToeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tic Tac ToeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		9D401B722D83464D00D5D1AB /* Exceptions for "Tic Tac Toe" folder in "Tic Tac ToeTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Firebase/GoogleService-Info.plist",
+			);
+			target = 9DD876362D62172A00EA2800 /* Tic Tac ToeTests */;
+		};
+		9D401B732D83464D00D5D1AB /* Exceptions for "Tic Tac Toe" folder in "Tic Tac ToeUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Firebase/GoogleService-Info.plist",
+			);
+			target = 9DD876402D62172A00EA2800 /* Tic Tac ToeUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		9DD876292D62172700EA2800 /* Tic Tac Toe */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				9D401B722D83464D00D5D1AB /* Exceptions for "Tic Tac Toe" folder in "Tic Tac ToeTests" target */,
+				9D401B732D83464D00D5D1AB /* Exceptions for "Tic Tac Toe" folder in "Tic Tac ToeUITests" target */,
+			);
 			path = "Tic Tac Toe";
 			sourceTree = "<group>";
 		};
@@ -403,6 +424,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -431,6 +453,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
