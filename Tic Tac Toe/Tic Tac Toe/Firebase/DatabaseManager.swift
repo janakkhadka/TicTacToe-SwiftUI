@@ -9,16 +9,16 @@ import Foundation
 import FirebaseDatabase
 
 class DatabaseManager: ObservableObject {
-    private let dbRef = Database.database().reference()
+    let dbRef = Database.database(url: "https://tic-tac-toe-f606f-default-rtdb.asia-southeast1.firebasedatabase.app").reference()
     
     @Published var users: [String: Any] = [:]
 
-    func writeData(userID: String, name: String, age: Int) {
+    func writeData(userID: UUID, name: String, age: Int) {
         let user: [String: Any] = [
             "name": name,
             "age": age
         ]
-        dbRef.child("users").child(userID).setValue(user)
+        dbRef.child("users").child(userID.uuidString).setValue(user)
     }
     
     func readData() {

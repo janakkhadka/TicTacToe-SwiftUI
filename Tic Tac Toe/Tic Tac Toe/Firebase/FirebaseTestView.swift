@@ -13,7 +13,8 @@ struct FirebaseTestView: View {
     var body: some View {
         VStack {
             Button("Save Data") {
-                dbManager.writeData(userID: "user123", name: "John Doe", age: 25)
+                dbManager.writeData(userID: UUID(), name: "Janak Khadka", age: 24)
+                print("saved successfully")
             }
             Button("Load Data") {
                 dbManager.readData()
