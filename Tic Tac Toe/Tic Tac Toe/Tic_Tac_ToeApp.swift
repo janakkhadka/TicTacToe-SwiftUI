@@ -14,8 +14,8 @@ struct Tic_Tac_ToeApp: App {
     
     var body: some Scene {
         WindowGroup {
-            //FirstView()
-            FirebaseTestView()
+            FirstView()
+            //FirebaseTestView()
         }
     }
 }
