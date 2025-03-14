@@ -11,5 +11,9 @@ import FirebaseDatabase
 class DatabaseViewModel: ObservableObject {
     let dbRef = Database.database(url: "https://tic-tac-toe-f606f-default-rtdb.asia-southeast1.firebasedatabase.app").reference()
     
+    @Published var board = GameBoard()
+    
+    
+    
     
 }
