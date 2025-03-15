@@ -11,12 +11,14 @@ struct GameBoard: Codable { //codeable le chai json haru maa change garna help g
     var isXTurn: Bool
     var winner: String?
     var xWinningCount: Int
+    var oWinningCount: Int
     
     init() {
         self.board = Array(repeating: "", count: 9)
         self.isXTurn = true
         self.winner = nil
         self.xWinningCount = 0
+        self.oWinningCount = 0
     }
     
 }
