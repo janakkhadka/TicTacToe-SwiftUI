@@ -16,6 +16,7 @@ struct GameBoard: Codable { //codeable le chai json haru maa change garna help g
         self.board = Array(repeating: "", count: 9)
         self.isXTurn = true
         self.winner = nil
+        self.xWinningCount = 0
     }
     
 }
