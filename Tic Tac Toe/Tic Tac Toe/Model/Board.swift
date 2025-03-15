@@ -10,6 +10,7 @@ struct GameBoard: Codable { //codeable le chai json haru maa change garna help g
     var board: [String]
     var isXTurn: Bool
     var winner: String?
+    var xWinningCount: Int
     
     init() {
         self.board = Array(repeating: "", count: 9)
