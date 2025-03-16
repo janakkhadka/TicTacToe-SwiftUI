@@ -18,11 +18,16 @@ class GameViewModel: ObservableObject {
         do {
             let data = try JSONEncoder().encode(board)
             if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                dbRef.child(UUID().uuidString).setValue(json)
+                dbRef.child("games").child(UUID().uuidString).setValue(json)
             }
         } catch {
             print("error encoding")
         }
+    }
+    
+    //value fetch garna lai
+    func fetchGameData() {
+        
     }
     
     
