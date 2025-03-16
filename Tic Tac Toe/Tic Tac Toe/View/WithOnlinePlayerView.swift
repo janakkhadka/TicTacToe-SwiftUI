@@ -25,10 +25,10 @@ struct WithOnlinePlayerView: View {
         VStack {
             // Computer Section
             Text("Won: \(oWinningCount)")
-            Text("Computer: O")
+            Text("Name: O")
                 .font(.system(size: 40, weight: .bold))
                 .foregroundColor(.blue)
-            Text(winner == nil ? "Computer Turn" : winner == "X" ? "Computer Loses!" : "Computer Wins!")
+            Text(winner == nil ? "Name Turn" : winner == "X" ? "Computer Loses!" : "Computer Wins!")
                 .opacity(winner != nil ? 1 : isXTurn ? 0 : 1)
             
             // Board Design
@@ -108,7 +108,7 @@ struct WithOnlinePlayerView: View {
             // Player Section
             Text(winner == nil ? "Your Turn" : winner == "O" ? "You Lose!" : "You Win!")
                 .opacity(winner != nil ? 1 : isXTurn ? 1 : 0)
-            Text("Player: X")
+            Text("You(Name): X")
                 .font(.system(size: 40, weight: .bold))
                 .foregroundColor(.red)
             Text("Won: \(xWinningCount)")
