@@ -18,7 +18,7 @@ class GameViewModel: ObservableObject {
         do {
             let data = try JSONEncoder().encode(board)
             if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                dbRef.child("games").child(uuid.uuidString).child(gameID).setValue(json)
+                dbRef.child("games").child(gameID).setValue(json)
             }
         } catch {
             print("error encoding: \(error.localizedDescription)")
@@ -27,7 +27,7 @@ class GameViewModel: ObservableObject {
     
     //value fetch garna lai
     func fetchGameData(uuid: UUID, gameID: String) {
-        dbRef.child("games").child(uuid.uuidString).child(gameID).observe(.value){ snapshot in
+        dbRef.child("games").child(gameID).observe(.value){ snapshot in
             guard let value = snapshot.value else { return }
             do {
                 let data = try  JSONSerialization.data(withJSONObject: value)

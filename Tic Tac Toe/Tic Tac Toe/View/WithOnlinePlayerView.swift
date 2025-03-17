@@ -68,7 +68,7 @@ struct WithOnlinePlayerView: View {
                 }
                 
                 // Game Board
-                GameBoardView(board: $board, isXTurn: $isXTurn, winner: $winner, viewModel: $viewModel, checkWinner: checkWinner, computerMove: computerMove)
+                GameBoardView(viewModel: $viewModel, checkWinner: checkWinner, computerMove: computerMove)
                 
                 // Winner Line
                 if let line = winnerLine {
@@ -188,9 +188,6 @@ struct WithOnlinePlayerView: View {
 
 
 struct GameBoardView: View {
-    @Binding var board: [String]
-    @Binding var isXTurn: Bool
-    @Binding var winner: String?
     @Binding var viewModel: GameViewModel
     var checkWinner: () -> Void
     var computerMove: () -> Void
@@ -199,26 +196,28 @@ struct GameBoardView: View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
             ForEach(0..<9, id: \.self) { index in
                 Button(action: {
-                    if board[index] == "" && winner == nil {
-                        board[index] = isXTurn ? "X" : "O"
-                        isXTurn.toggle()
+                    if viewModel.board.boardValue[index] == "" && viewModel.board.winner == nil {
+                        viewModel.board.boardValue[index] = viewModel.board.isXTurn ? "X" : "O"
+                        viewModel.board.isXTurn.toggle()
                         checkWinner()
                         viewModel.sendGameData(uuid: UUID(), gameID: "123")
                         
                         // computer ko palo aayesi
-                        if !isXTurn && winner == nil {
+                        if !viewModel.board.isXTurn && viewModel.board.winner == nil {
+                            viewModel.fetchGameData(uuid: UUID(), gameID: "123")
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                print(viewModel.board.isXTurn)
                                 computerMove()
                             }
                         }
                     }
                 }) {
-                    Text(board[index])
+                    Text(viewModel.board.boardValue[index])
                         .font(.system(size: 70, weight: .bold))
                         .frame(width: 100, height: 100)
-                        .foregroundColor(board[index] == "X" ? .red : .blue)
+                        .foregroundColor(viewModel.board.boardValue[index] == "X" ? .red : .blue)
                 }
-                .disabled(!isXTurn || board[index] != "" || winner != nil)
+                .disabled(!viewModel.board.isXTurn || viewModel.board.boardValue[index] != "" || viewModel.board.winner != nil)
             }
         }
     }
