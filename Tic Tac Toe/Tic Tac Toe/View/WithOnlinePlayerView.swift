@@ -114,15 +114,15 @@ struct WithOnlinePlayerView: View {
     
     // Computer Move Logic
     private func computerMove() {
-        guard winner == nil else { return }
+        guard viewModel.board.winner == nil else { return }
         
         // Find all empty spots
         let emptySpots = board.enumerated().compactMap { $0.element == "" ? $0.offset : nil }
         
         // Choose a random empty spot
         if let randomSpot = emptySpots.randomElement() {
-            board[randomSpot] = "O"
-            isXTurn.toggle()
+            viewModel.board.boardValue[randomSpot] = "O"
+            viewModel.board.isXTurn.toggle()
             checkWinner()
         }
     }
@@ -136,18 +136,18 @@ struct WithOnlinePlayerView: View {
         ]
 
         for combination in winningCombinations {
-            if board[combination[0]] != "" && board[combination[0]] == board[combination[1]] && board[combination[1]] == board[combination[2]] {
-                winner = board[combination[0]]
+            if viewModel.board.boardValue[combination[0]] != "" && viewModel.board.boardValue[combination[0]] == board[combination[1]] && viewModel.board.boardValue[combination[1]] == viewModel.board.boardValue[combination[2]] {
+                viewModel.board.winner = viewModel.board.boardValue[combination[0]]
                 winnerLine = getLinePosition(for: combination)
                 
                 isHorizontal = combination[0] + 1 == combination[1]
                 isVertical = combination[0] + 3 == combination[1]
                 isDiagonal = !isHorizontal && !isVertical
 
-                if winner == "X" {
-                    xWinningCount += 1
-                } else if winner == "O" {
-                    oWinningCount += 1
+                if viewModel.board.winner == "X" {
+                    viewModel.board.xWinningCount += 1
+                } else if viewModel.board.winner == "O" {
+                    viewModel.board.oWinningCount += 1
                 }
                 
                 isShowAlert = true
@@ -155,8 +155,8 @@ struct WithOnlinePlayerView: View {
             }
         }
 
-        if !board.contains("") {
-            winner = "Draw"
+        if !viewModel.board.boardValue.contains("") {
+            viewModel.board.winner = "Draw"
             isShowAlert = true
         }
     }
@@ -204,10 +204,10 @@ struct GameBoardView: View {
                         
                         // computer ko palo aayesi
                         if !viewModel.board.isXTurn && viewModel.board.winner == nil {
-                            viewModel.fetchGameData(uuid: UUID(), gameID: "123")
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                 print(viewModel.board.isXTurn)
                                 computerMove()
+                                viewModel.sendGameData(uuid: UUID(), gameID: "123")
                             }
                         }
                     }
