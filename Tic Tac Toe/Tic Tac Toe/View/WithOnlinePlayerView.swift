@@ -14,7 +14,8 @@ struct WithOnlinePlayerView: View {
     @State private var xWinningCount: Int = 0
     @State private var oWinningCount: Int = 0
     
-    @State private var viewModel = GameViewModel()
+    @StateObject private var viewModel = GameViewModel()
+    //stateobject le chai view lai persist garxa child view maa ni
     
     @State private var isShowAlert: Bool = false
     
@@ -68,12 +69,12 @@ struct WithOnlinePlayerView: View {
                 }
                 
                 // Game Board
-                GameBoardView(viewModel: $viewModel, checkWinner: checkWinner, computerMove: computerMove)
+                GameBoardView(viewModel: viewModel, checkWinner: checkWinner, computerMove: computerMove)
                 
                 // Winner Line
                 if let line = winnerLine {
                     Rectangle()
-                        .fill(winner == "X" ? Color.red : Color.blue)
+                        .fill(viewModel.board.winner == "X" ? Color.red : Color.blue)
                         .frame(
                             width: isDiagonal ? 350 * 1.3 : (isHorizontal ? 350 : 5),
                             height: isDiagonal ? 5 : (isHorizontal ? 5 : 350)
@@ -117,7 +118,7 @@ struct WithOnlinePlayerView: View {
         guard viewModel.board.winner == nil else { return }
         
         // Find all empty spots
-        let emptySpots = board.enumerated().compactMap { $0.element == "" ? $0.offset : nil }
+        let emptySpots = viewModel.board.boardValue.enumerated().compactMap { $0.element == "" ? $0.offset : nil }
         
         // Choose a random empty spot
         if let randomSpot = emptySpots.randomElement() {
@@ -188,7 +189,7 @@ struct WithOnlinePlayerView: View {
 
 
 struct GameBoardView: View {
-    @Binding var viewModel: GameViewModel
+    @ObservedObject var viewModel: GameViewModel
     var checkWinner: () -> Void
     var computerMove: () -> Void
 
@@ -206,6 +207,7 @@ struct GameBoardView: View {
                         if !viewModel.board.isXTurn && viewModel.board.winner == nil {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                 print(viewModel.board.isXTurn)
+                                //viewModel.fetchGameData(uuid: UUID(), gameID: "123")
                                 computerMove()
                                 viewModel.sendGameData(uuid: UUID(), gameID: "123")
                             }
