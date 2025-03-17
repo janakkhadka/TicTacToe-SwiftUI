@@ -14,23 +14,32 @@ class GameViewModel: ObservableObject {
     @Published var board = GameBoard()
     
     //value database maa pathauna lai
-    func sendGameData() {
+    func sendGameData(uuid: UUID, gameID: String) {
         do {
             let data = try JSONEncoder().encode(board)
             if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                dbRef.child("games").child(UUID().uuidString).setValue(json)
+                dbRef.child("games").child(uuid.uuidString).child(gameID).setValue(json)
             }
         } catch {
-            print("error encoding")
+            print("error encoding: \(error.localizedDescription)")
         }
     }
     
     //value fetch garna lai
-    func fetchGameData() {
-        
+    func fetchGameData(uuid: UUID, gameID: String) {
+        dbRef.child("games").child(uuid.uuidString).child(gameID).observe(.value){ snapshot in
+            guard let value = snapshot.value else { return }
+            do {
+                let data = try  JSONSerialization.data(withJSONObject: value)
+                let board = try JSONDecoder().decode(GameBoard.self, from: data)
+                
+                DispatchQueue.main.async{
+                    self.board = board
+                }
+            } catch {
+                print("error decoding board: \(error.localizedDescription)")
+            }
+        }
     }
-    
-    
-    
     
 }
