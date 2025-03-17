@@ -14,6 +14,8 @@ struct WithOnlinePlayerView: View {
     @State private var xWinningCount: Int = 0
     @State private var oWinningCount: Int = 0
     
+    @State private var viewModel = GameViewModel()
+    
     @State private var isShowAlert: Bool = false
     
     @State private var winnerLine: (start: CGPoint, end: CGPoint)? = nil
@@ -73,6 +75,7 @@ struct WithOnlinePlayerView: View {
                                 board[index] = isXTurn ? "X" : "O"
                                 isXTurn.toggle()
                                 checkWinner()
+                                viewModel.sendGameData(uuid: UUID(), gameID: 123)
                                 
                                 // computer ko palo aayesi
                                 if !isXTurn && winner == nil {
