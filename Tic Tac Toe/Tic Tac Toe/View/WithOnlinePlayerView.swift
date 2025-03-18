@@ -31,7 +31,7 @@ struct WithOnlinePlayerView: View {
             Text("Name: O")
                 .font(.system(size: 40, weight: .bold))
                 .foregroundColor(.blue)
-            Text(viewModel.board.winner == nil ? "Name Turn" : viewModel.board.winner == "X" ? "Computer Loses!" : "Computer Wins!")
+            Text(viewModel.board.winner == nil ? "Name Turn" : viewModel.board.winner == "X" ? "Computer Loses!" : viewModel.board.winner == "Draw" ? "Draw" : "Computer Wins!")
                 .opacity(viewModel.board.winner != nil ? 1 : viewModel.board.isXTurn ? 0 : 1)
             
             // Board Design
@@ -86,7 +86,7 @@ struct WithOnlinePlayerView: View {
             .frame(width: 360, height: 360)
             
             // Player Section
-            Text(viewModel.board.winner == nil ? "Your Turn" : viewModel.board.winner == "O" ? "You Lose!" : "You Win!")
+            Text(viewModel.board.winner == nil ? "Your Turn" : viewModel.board.winner == "O" ? "You Lose!": viewModel.board.winner == "Draw" ? "Draw" : "You Win!")
                 .opacity(viewModel.board.winner != nil ? 1 : viewModel.board.isXTurn ? 1 : 0)
             Text("You(Name): X")
                 .font(.system(size: 40, weight: .bold))
