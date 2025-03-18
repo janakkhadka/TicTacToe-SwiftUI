@@ -31,7 +31,7 @@ struct WithOnlinePlayerView: View {
             Text("Name: O")
                 .font(.system(size: 40, weight: .bold))
                 .foregroundColor(.blue)
-            Text(viewModel.board.winner == nil ? "Name Turn" : viewModel.board.winner == "X" ? "Computer Loses!" : viewModel.board.winner == "Draw" ? "Draw" : "Computer Wins!")
+            Text(viewModel.board.winner == nil ? "Name Turn" : viewModel.board.winner == "X" ? "Computer Loses!" : viewModel.board.winner == "Draw" ? "Draw" : "Name Wins!")
                 .opacity(viewModel.board.winner != nil ? 1 : viewModel.board.isXTurn ? 0 : 1)
             
             // Board Design
