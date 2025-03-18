@@ -27,12 +27,12 @@ struct WithOnlinePlayerView: View {
     var body: some View {
         VStack {
             // Computer Section
-            Text("Won: \(oWinningCount)")
+            Text("Won: \(viewModel.board.oWinningCount)")
             Text("Name: O")
                 .font(.system(size: 40, weight: .bold))
                 .foregroundColor(.blue)
-            Text(winner == nil ? "Name Turn" : winner == "X" ? "Computer Loses!" : "Computer Wins!")
-                .opacity(winner != nil ? 1 : isXTurn ? 0 : 1)
+            Text(viewModel.board.winner == nil ? "Name Turn" : viewModel.board.winner == "X" ? "Computer Loses!" : "Computer Wins!")
+                .opacity(viewModel.board.winner != nil ? 1 : viewModel.board.isXTurn ? 0 : 1)
             
             // Board Design
             ZStack {
@@ -86,30 +86,30 @@ struct WithOnlinePlayerView: View {
             .frame(width: 360, height: 360)
             
             // Player Section
-            Text(winner == nil ? "Your Turn" : winner == "O" ? "You Lose!" : "You Win!")
-                .opacity(winner != nil ? 1 : isXTurn ? 1 : 0)
+            Text(viewModel.board.winner == nil ? "Your Turn" : viewModel.board.winner == "O" ? "You Lose!" : "You Win!")
+                .opacity(viewModel.board.winner != nil ? 1 : viewModel.board.isXTurn ? 1 : 0)
             Text("You(Name): X")
                 .font(.system(size: 40, weight: .bold))
                 .foregroundColor(.red)
-            Text("Won: \(xWinningCount)")
+            Text("Won: \(viewModel.board.xWinningCount)")
             
             // Restart Button
             Button("Restart") {
-                board = Array(repeating: "", count: 9)
-                isXTurn = true
-                winner = nil
+                viewModel.board.boardValue = Array(repeating: "", count: 9)
+                viewModel.board.isXTurn = true
+                viewModel.board.winner = nil
                 winnerLine = nil
             }
             .padding()
             .background(Color.red)
             .foregroundColor(.white)
             .cornerRadius(10)
-            .opacity(winner != nil ? 1 : 0)
+            .opacity(viewModel.board.winner != nil ? 1 : 0)
         }
-        .alert(winner == "Draw" ? "Draw" : "Player \(winner ?? "") wins!", isPresented: $isShowAlert) {
+        .alert(viewModel.board.winner == "Draw" ? "Draw" : "Player \(viewModel.board.winner ?? "") wins!", isPresented: $isShowAlert) {
             Button("OK", role: .cancel) { }
         }  message: {
-            Text(winner == "Draw" ? "No one wins the game." : "Congratulations! Player \(winner ?? "") wins the game.")
+            Text(viewModel.board.winner == "Draw" ? "No one wins the game." : "Congratulations! Player \(viewModel.board.winner ?? "") wins the game.")
         }
     }
     
