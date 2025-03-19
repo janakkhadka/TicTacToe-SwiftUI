@@ -99,6 +99,7 @@ struct WithOnlinePlayerView: View {
                 viewModel.board.isXTurn = true
                 viewModel.board.winner = nil
                 winnerLine = nil
+                viewModel.sendGameData(uuid: UUID(), gameID: "123")
             }
             .padding()
             .background(Color.red)
