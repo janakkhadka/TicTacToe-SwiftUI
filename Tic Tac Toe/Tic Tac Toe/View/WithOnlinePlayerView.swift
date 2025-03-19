@@ -17,7 +17,7 @@ struct WithOnlinePlayerView: View {
     @StateObject private var viewModel = GameViewModel()
     //stateobject le chai view lai persist garxa child view maa ni
     
-    @State private var isShowAlert: Bool = false
+    //@State private var isShowAlert: Bool = false
     
     @State private var winnerLine: (start: CGPoint, end: CGPoint)? = nil
     @State private var isHorizontal: Bool = false
@@ -107,7 +107,7 @@ struct WithOnlinePlayerView: View {
             .cornerRadius(10)
             .opacity(viewModel.board.winner != nil ? 1 : 0)
         }
-        .alert(viewModel.board.winner == "Draw" ? "Draw" : "Player \(viewModel.board.winner ?? "") wins!", isPresented: $isShowAlert) {
+        .alert(viewModel.board.winner == "Draw" ? "Draw" : "Player \(viewModel.board.winner ?? "") wins!", isPresented: $viewModel.board.isShowAlert) {
             Button("OK", role: .cancel) { }
         }  message: {
             Text(viewModel.board.winner == "Draw" ? "No one wins the game." : "Congratulations! Player \(viewModel.board.winner ?? "") wins the game.")
@@ -152,14 +152,14 @@ struct WithOnlinePlayerView: View {
                     viewModel.board.oWinningCount += 1
                 }
                 
-                isShowAlert = true
+                viewModel.board.isShowAlert = true
                 return
             }
         }
 
         if !viewModel.board.boardValue.contains("") {
             viewModel.board.winner = "Draw"
-            isShowAlert = true
+            viewModel.board.isShowAlert = true
         }
     }
     
