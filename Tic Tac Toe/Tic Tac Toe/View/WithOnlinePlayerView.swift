@@ -222,6 +222,9 @@ struct GameBoardView: View {
                 .disabled(!viewModel.board.isXTurn || viewModel.board.boardValue[index] != "" || viewModel.board.winner != nil)
             }
         }
+        .onAppear {
+                    viewModel.fetchGameData(uuid: UUID(), gameID: "123")
+                }
     }
 }
 
