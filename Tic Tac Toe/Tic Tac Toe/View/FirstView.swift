@@ -14,16 +14,19 @@ struct FirstView: View {
                 Text("JK Tic-Tac-Toe")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                
-                // Navigate to 2-Player Mode
+
                 NavigationLink("Play with Computer") {
                     WithComputerView()
                 }
                 .buttonStyle(CustomButtonStyle())
 
-                // Navigate to Computer Mode
-                NavigationLink("Play with Friend") {
+                NavigationLink("Play with Friend(OFFLINE)") {
                     WithPlayerView()
+                }
+                .buttonStyle(CustomButtonStyle())
+                
+                NavigationLink("Play with Friend(ONLINE)") {
+                    WithOnlinePlayerView()
                 }
                 .buttonStyle(CustomButtonStyle())
             }
