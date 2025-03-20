@@ -13,7 +13,7 @@ struct GameBoard: Codable { //codeable le chai json haru maa change garna help g
     var xWinningCount: Int
     var oWinningCount: Int
     var isShowAlert: Bool
-    //var winnerLine: (start: CGPoint, end: CGPoint)?
+    var winnerLine: (start: CGPoint, end: CGPoint)?
     
     init() {
         self.boardValue = Array(repeating: "", count: 9)
