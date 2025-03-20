@@ -15,17 +15,17 @@ struct FirstView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
 
-                NavigationLink("Play with Computer") {
+                NavigationLink("Computer") {
                     WithComputerView()
                 }
                 .buttonStyle(CustomButtonStyle())
 
-                NavigationLink("Play with Friend(OFFLINE)") {
+                NavigationLink("2-Player(OFFlINE)") {
                     WithPlayerView()
                 }
                 .buttonStyle(CustomButtonStyle())
                 
-                NavigationLink("Play with Friend(ONLINE)") {
+                NavigationLink("2-Player(ONLINE)") {
                     WithOnlinePlayerView()
                 }
                 .buttonStyle(CustomButtonStyle())
