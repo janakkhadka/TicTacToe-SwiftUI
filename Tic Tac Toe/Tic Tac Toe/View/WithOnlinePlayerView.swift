@@ -28,6 +28,7 @@ struct WithOnlinePlayerView: View {
         VStack {
             // Computer Section
             Text("Network Status:")
+            Text("Ping:")
             Text("Won: \(viewModel.board.oWinningCount)")
             Text("Name: O")
                 .font(.system(size: 40, weight: .bold))
@@ -93,6 +94,7 @@ struct WithOnlinePlayerView: View {
                 .font(.system(size: 40, weight: .bold))
                 .foregroundColor(.red)
             Text("Won: \(viewModel.board.xWinningCount)")
+            Text("Ping:")
             Text("Network Status:")
             
             // Restart Button
