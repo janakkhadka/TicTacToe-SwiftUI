@@ -13,6 +13,8 @@ class GameViewModel: ObservableObject {
     
     @Published var board = GameBoard()
     
+    
+    
     //value database maa pathauna lai
     func sendGameData(uuid: UUID, gameID: String) {
         do {
