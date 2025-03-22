@@ -129,7 +129,7 @@ struct WithOnlinePlayerView: View {
         if let randomSpot = emptySpots.randomElement() {
             viewModel.board.boardValue[randomSpot] = "O"
             viewModel.board.isXTurn.toggle()
-            checkWinner()
+            //checkWinner()
         }
     }
     
