@@ -118,6 +118,9 @@ struct WithOnlinePlayerView: View {
         }
         .onChange(of: viewModel.board.boardValue) {
             checkWinner()
+            if(winner == "Draw" || viewModel.board.boardValue == Array(repeating: "", count: 9)){
+                winnerLine = nil
+            }
         }
     }
     
