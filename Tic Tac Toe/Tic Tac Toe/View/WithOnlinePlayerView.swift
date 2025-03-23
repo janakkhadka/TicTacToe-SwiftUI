@@ -102,7 +102,7 @@ struct WithOnlinePlayerView: View {
                 viewModel.board.boardValue = Array(repeating: "", count: 9)
                 viewModel.board.isXTurn = true
                 viewModel.board.winner = nil
-                winnerLine = nil
+                //winnerLine = nil
                 viewModel.sendGameData(uuid: UUID(), gameID: "123")
             }
             .padding()
@@ -144,10 +144,10 @@ struct WithOnlinePlayerView: View {
         let winningCombinations: [[Int]] = [
             [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontal
             [0, 3, 6], [1, 4, 7], [2, 5, 8], // Vertical
-            [0, 4, 8], [2, 4, 6]              // Diagonal
+            [0, 4, 8], [2, 4, 6]            // Diagonal
         ]
 
-        for combination in winningCombinations {
+        //for combination in winningCombinations {
             if viewModel.board.boardValue[combination[0]] != "" && viewModel.board.boardValue[combination[0]] == viewModel.board.boardValue[combination[1]] && viewModel.board.boardValue[combination[1]] == viewModel.board.boardValue[combination[2]] {
                 viewModel.board.winner = viewModel.board.boardValue[combination[0]]
                 winnerLine = getLinePosition(for: combination)
