@@ -116,6 +116,9 @@ struct WithOnlinePlayerView: View {
         }  message: {
             Text(viewModel.board.winner == "Draw" ? "No one wins the game." : "Congratulations! Player \(viewModel.board.winner ?? "") wins the game.")
         }
+        .onChange(of: viewModel.board.boardValue) {
+            checkWinner()
+        }
     }
     
     // Computer Move Logic
