@@ -147,7 +147,7 @@ struct WithOnlinePlayerView: View {
             [0, 4, 8], [2, 4, 6]            // Diagonal
         ]
 
-        //for combination in winningCombinations {
+        for combination in winningCombinations {
             if viewModel.board.boardValue[combination[0]] != "" && viewModel.board.boardValue[combination[0]] == viewModel.board.boardValue[combination[1]] && viewModel.board.boardValue[combination[1]] == viewModel.board.boardValue[combination[2]] {
                 viewModel.board.winner = viewModel.board.boardValue[combination[0]]
                 winnerLine = getLinePosition(for: combination)
