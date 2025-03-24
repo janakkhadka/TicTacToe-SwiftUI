@@ -8,12 +8,22 @@
 import SwiftUI
 
 struct FirstView: View {
+    @State private var username: String = ""                      // To store user input
+    @State private var isLoggedIn: Bool = false                   // Track login status
+    @State private var showAlert: Bool = false
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
                 Text("JK Tic-Tac-Toe")
                     .font(.largeTitle)
                     .fontWeight(.bold)
+                
+                if isLoggedIn {
+                    Text("Welcome, \(username)!")
+                    .font(.largeTitle)
+                    .padding()
+                }
 
                 NavigationLink("Computer") {
                     WithComputerView()
@@ -31,6 +41,7 @@ struct FirstView: View {
                 .buttonStyle(CustomButtonStyle())
             }
             .padding()
+            
         }
     }
 }
