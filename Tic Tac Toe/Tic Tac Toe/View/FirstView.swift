@@ -21,8 +21,8 @@ struct FirstView: View {
                 
                 if isLoggedIn {
                     Text("Welcome, \(username)!")
-                    .font(.largeTitle)
-                    .padding()
+                        .font(.largeTitle)
+                        .padding()
                 }
 
                 NavigationLink("Computer") {
@@ -41,6 +41,11 @@ struct FirstView: View {
                 .buttonStyle(CustomButtonStyle())
             }
             .padding()
+            .onAppear {
+                if !isLoggedIn {
+                    showAlert = true
+                }
+            }
             
         }
     }
