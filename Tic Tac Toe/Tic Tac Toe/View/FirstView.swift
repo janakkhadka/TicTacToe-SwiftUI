@@ -46,8 +46,18 @@ struct FirstView: View {
                     showAlert = true
                 }
             }
+            .alert("Enter your name", isPresented: $showAlert){
+                TextField("Name", text: $username)
+                Button("Cancel", role: .cancel) {}
+                Button("Save"){
+                    save()
+                }
+            }
             
         }
+    }
+    func save(){
+        print("save")
     }
 }
 
