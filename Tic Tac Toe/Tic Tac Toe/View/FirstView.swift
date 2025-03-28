@@ -23,7 +23,7 @@ struct FirstView: View {
                     Text("Welcome, \(username)!")
                         .font(.largeTitle)
                         .padding()
-                }//
+                }
 
                 NavigationLink("Computer") {
                     WithComputerView()
