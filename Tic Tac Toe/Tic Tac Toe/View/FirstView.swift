@@ -19,11 +19,12 @@ struct FirstView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 
-                if isLoggedIn {
-                    Text("Welcome, \(username)!")
-                        .font(.largeTitle)
-                        .padding()
-                }
+
+                Text("Welcome, \(username)!")
+                    .font(.largeTitle)
+                    .padding()
+                    .opacity(isLoggedIn ? 1 : 0)
+
 
                 NavigationLink("Computer") {
                     WithComputerView()
@@ -51,12 +52,14 @@ struct FirstView: View {
                 Button("Cancel", role: .cancel) {}
                 Button("Save"){
                     save()
+                    
                 }
             }
         }
     }
     func save(){
         print("save")
+        isLoggedIn = true
     }
 }
 
