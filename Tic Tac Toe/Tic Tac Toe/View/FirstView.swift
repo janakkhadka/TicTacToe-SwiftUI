@@ -28,7 +28,7 @@ struct FirstView: View {
 
                 NavigationLink("Computer") {
                     WithComputerView()
-                }
+                }//
                 .buttonStyle(CustomButtonStyle())
 
                 NavigationLink("2-Player(OFFlINE)") {
