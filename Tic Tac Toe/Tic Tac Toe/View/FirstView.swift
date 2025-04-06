@@ -12,7 +12,8 @@ struct FirstView: View {
     @State private var isLoggedIn: Bool = false                   // Track login status
     @State private var showAlert: Bool = false
     
-    var isUsernameSaved: Bool = UserDefaults.standard.bool(forKey: "isloggedin") != false
+    var isUsernameSaved: Bool = UserDefaults.standard.bool(forKey: "isloggedin")
+    var savedUsername: String = UserDefaults.standard.string(forKey: "username") ?? "" //?? le chai nil xa vane blank string dinxa, ! yo use garda chai tya value xa nai vanera assume garxa
     
     var body: some View {
         NavigationStack {
@@ -22,7 +23,7 @@ struct FirstView: View {
                     .fontWeight(.bold)
                 
 
-                Text("Welcome, \(username)!")
+                Text("Welcome, \(savedUsername)!")
                     .font(.largeTitle)
                     .padding()
                     .opacity(isLoggedIn ? 1 : 0)
