@@ -60,6 +60,8 @@ struct FirstView: View {
     func save(){
         print("save")
         isLoggedIn = true
+        UserDefaults.standard.set(username, forKey: "username")
+        
     }
 }
 
