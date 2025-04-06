@@ -12,6 +12,8 @@ struct FirstView: View {
     @State private var isLoggedIn: Bool = false                   // Track login status
     @State private var showAlert: Bool = false
     
+    var isUsernameSaved: Bool = UserDefaults.standard.bool(forKey: "isloggedin") != false
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
@@ -43,7 +45,7 @@ struct FirstView: View {
             }
             .padding()
             .onAppear {
-                if !isLoggedIn {
+                if !isUsernameSaved {
                     showAlert = true
                 }
             }
@@ -61,7 +63,7 @@ struct FirstView: View {
         print("save")
         isLoggedIn = true
         UserDefaults.standard.set(username, forKey: "username")
-        
+        UserDefaults.standard.set(isLoggedIn, forKey: "isloggedin")
     }
 }
 
