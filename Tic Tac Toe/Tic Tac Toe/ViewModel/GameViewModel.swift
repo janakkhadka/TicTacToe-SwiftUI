@@ -30,7 +30,7 @@ class GameViewModel: ObservableObject {
     
     //value fetch garna lai
     func fetchGameData(uuid: UUID) {
-        dbRef.child("games").child(uuid.uuidString).observe(.value){ snapshot in
+        dbRef.child(savedUsername).child(uuid.uuidString).observe(.value){ snapshot in
             guard let value = snapshot.value else { return }
             do {
                 let data = try  JSONSerialization.data(withJSONObject: value)

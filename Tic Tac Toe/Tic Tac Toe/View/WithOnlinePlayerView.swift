@@ -101,7 +101,7 @@ struct WithOnlinePlayerView: View {
                 viewModel.board.isXTurn = true
                 viewModel.board.winner = nil
                 //winnerLine = nil
-                viewModel.sendGameData(uuid: UUID())
+                viewModel.sendGameData(uuid: currentUUID)
             }
             .padding()
             .background(Color.red)
@@ -219,7 +219,7 @@ struct GameBoardView: View {
                                 print(viewModel.board.isXTurn)
                                 //viewModel.fetchGameData(uuid: UUID(), gameID: "123")
                                 computerMove()
-                                viewModel.sendGameData(uuid: UUID())
+                                viewModel.sendGameData(uuid: currentUUID)
                             }
                         }
                     }
@@ -233,7 +233,7 @@ struct GameBoardView: View {
             }
         }
         .onAppear {
-                    viewModel.fetchGameData(uuid: UUID())
+           viewModel.fetchGameData(uuid: currentUUID)
                 }
     }
 }
