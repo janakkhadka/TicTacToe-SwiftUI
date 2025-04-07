@@ -55,7 +55,6 @@ struct FirstView: View {
                 Button("Cancel", role: .cancel) {}
                 Button("Save"){
                     save()
-                    
                 }
             }
         }
