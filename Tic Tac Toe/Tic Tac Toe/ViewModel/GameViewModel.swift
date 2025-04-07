@@ -30,19 +30,24 @@ class GameViewModel: ObservableObject {
     
     //value fetch garna lai
     func fetchGameData(uuid: UUID) {
-        dbRef.child(savedUsername).child(uuid.uuidString).observe(.value){ snapshot in
-            guard let value = snapshot.value else { return }
-            do {
-                let data = try  JSONSerialization.data(withJSONObject: value)
-                let board = try JSONDecoder().decode(GameBoard.self, from: data)
-                
-                DispatchQueue.main.async{
-                    self.board = board
+        dbRef.child(savedUsername).child(uuid.uuidString).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                guard let value = snapshot.value else { return }
+                do {
+                    let data = try JSONSerialization.data(withJSONObject: value)
+                    let board = try JSONDecoder().decode(GameBoard.self, from: data)
+                    
+                    DispatchQueue.main.async {
+                        self.board = board
+                    }
+                } catch {
+                    print("Error decoding board: \(error.localizedDescription)")
                 }
-            } catch {
-                print("error decoding board: \(error.localizedDescription)")
+            } else {
+                print("No game data found for UUID: \(uuid.uuidString)")
             }
         }
     }
+
     
 }
