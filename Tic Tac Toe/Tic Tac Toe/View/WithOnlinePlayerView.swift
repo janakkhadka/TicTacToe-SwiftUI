@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct WithOnlinePlayerView: View {
-    @State private var board = Array(repeating: "", count: 9)
-    @State private var isXTurn = true
-    @State private var winner: String? = nil
-    @State private var xWinningCount: Int = 0
-    @State private var oWinningCount: Int = 0
+
     
     @StateObject private var viewModel = GameViewModel()
     //stateobject le chai view lai persist garxa child view maa ni
@@ -23,6 +19,8 @@ struct WithOnlinePlayerView: View {
     @State private var isHorizontal: Bool = false
     @State private var isVertical: Bool = false
     @State private var isDiagonal: Bool = false
+    
+    private let currentUUID: UUID = UUID()
     
     var body: some View {
         VStack {
@@ -71,7 +69,7 @@ struct WithOnlinePlayerView: View {
                 }
                 
                 // Game Board
-                GameBoardView(viewModel: viewModel, checkWinner: checkWinner, computerMove: computerMove)
+                GameBoardView(viewModel: viewModel, currentUUID: currentUUID, checkWinner: checkWinner, computerMove: computerMove)
                 
                 // Winner Line
                 if let line = winnerLine {
@@ -103,7 +101,7 @@ struct WithOnlinePlayerView: View {
                 viewModel.board.isXTurn = true
                 viewModel.board.winner = nil
                 //winnerLine = nil
-                viewModel.sendGameData(uuid: UUID(), gameID: "123")
+                viewModel.sendGameData(uuid: UUID())
             }
             .padding()
             .background(Color.red)
@@ -118,7 +116,7 @@ struct WithOnlinePlayerView: View {
         }
         .onChange(of: viewModel.board.boardValue) {
             checkWinner()
-            if(winner == "Draw" || viewModel.board.boardValue == Array(repeating: "", count: 9)){
+            if(viewModel.board.winner == "Draw" || viewModel.board.boardValue == Array(repeating: "", count: 9)){
                 winnerLine = nil
             }
         }
@@ -201,6 +199,7 @@ struct WithOnlinePlayerView: View {
 
 struct GameBoardView: View {
     @ObservedObject var viewModel: GameViewModel
+    let currentUUID : UUID
     var checkWinner: () -> Void
     var computerMove: () -> Void
 
@@ -212,7 +211,7 @@ struct GameBoardView: View {
                         viewModel.board.boardValue[index] = viewModel.board.isXTurn ? "X" : "O"
                         viewModel.board.isXTurn.toggle()
                         checkWinner()
-                        viewModel.sendGameData(uuid: UUID(), gameID: "123")
+                        viewModel.sendGameData(uuid: currentUUID)
                         
                         // computer ko palo aayesi
                         if !viewModel.board.isXTurn && viewModel.board.winner == nil {
@@ -220,7 +219,7 @@ struct GameBoardView: View {
                                 print(viewModel.board.isXTurn)
                                 //viewModel.fetchGameData(uuid: UUID(), gameID: "123")
                                 computerMove()
-                                viewModel.sendGameData(uuid: UUID(), gameID: "123")
+                                viewModel.sendGameData(uuid: UUID())
                             }
                         }
                     }
@@ -234,7 +233,7 @@ struct GameBoardView: View {
             }
         }
         .onAppear {
-                    viewModel.fetchGameData(uuid: UUID(), gameID: "123")
+                    viewModel.fetchGameData(uuid: UUID())
                 }
     }
 }
