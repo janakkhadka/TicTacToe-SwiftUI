@@ -39,7 +39,7 @@ class GameViewModel: ObservableObject {
                     
                     DispatchQueue.main.async {
                         self.board = board
-                    }//
+                    }
                 } catch {
                     print("Error decoding board: \(error.localizedDescription)")
                 }
